@@ -10,9 +10,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   webpack: (config) => {
     // This adds a plugin to provide useEffectEvent
     config.plugins.push(

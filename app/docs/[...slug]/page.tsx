@@ -33,21 +33,21 @@ const directionInfo: Record<string, { name: string; color: string; bgColor: stri
 
 // Custom components for markdown rendering
 const MarkdownComponents = {
-    h1: ({ node, ...props }: any) => <h1 id={props.id} className="scroll-mt-24 text-3xl md:text-4xl font-black text-gray-900 mb-6 mt-10 pb-4 border-b border-gray-200" {...props} />,
-    h2: ({ node, ...props }: any) => <h2 id={props.id} className="scroll-mt-24 text-2xl md:text-3xl font-bold text-gray-800 mb-4 mt-12 flex items-center gap-2 group" {...props} >
+    h1: ({ node, ...props }: any) => <h1 id={props.id} className="scroll-mt-24 text-3xl md:text-4xl font-black text-foreground mb-6 mt-10 pb-4 border-b border-border" {...props} />,
+    h2: ({ node, ...props }: any) => <h2 id={props.id} className="scroll-mt-24 text-2xl md:text-3xl font-bold text-foreground mb-4 mt-12 flex items-center gap-2 group" {...props} >
         <span className="w-1.5 h-8 bg-var-color-5 rounded-full inline-block mr-2"></span>
         {props.children}
     </h2>,
-    h3: ({ node, ...props }: any) => <h3 id={props.id} className="scroll-mt-24 text-xl md:text-2xl font-bold text-gray-800 mb-3 mt-8 flex items-center" {...props} >
+    h3: ({ node, ...props }: any) => <h3 id={props.id} className="scroll-mt-24 text-xl md:text-2xl font-bold text-foreground mb-3 mt-8 flex items-center" {...props} >
         <span className="text-var-color-5 mr-2 opacity-60">#</span>
         {props.children}
     </h3>,
-    h4: ({ node, ...props }: any) => <h4 id={props.id} className="scroll-mt-24 text-lg font-bold text-gray-700 mb-2 mt-6 uppercase tracking-wider" {...props} />,
+    h4: ({ node, ...props }: any) => <h4 id={props.id} className="scroll-mt-24 text-lg font-bold text-muted-foreground mb-2 mt-6 uppercase tracking-wider" {...props} />,
 
-    p: ({ node, ...props }: any) => <div className="text-base md:text-lg leading-7 mb-6 text-gray-700 font-sans" {...props} />,
+    p: ({ node, ...props }: any) => <div className="text-base md:text-lg leading-7 mb-6 text-muted-foreground font-sans" {...props} />,
 
-    ul: ({ node, ...props }: any) => <ul className="list-disc list-outside ml-6 mb-6 space-y-2 text-gray-700 marker:text-var-color-5" {...props} />,
-    ol: ({ node, ...props }: any) => <ol className="list-decimal list-outside ml-6 mb-6 space-y-2 text-gray-700 marker:text-var-color-5 marker:font-bold" {...props} />,
+    ul: ({ node, ...props }: any) => <ul className="list-disc list-outside ml-6 mb-6 space-y-2 text-muted-foreground marker:text-var-color-5" {...props} />,
+    ol: ({ node, ...props }: any) => <ol className="list-decimal list-outside ml-6 mb-6 space-y-2 text-muted-foreground marker:text-var-color-5 marker:font-bold" {...props} />,
     li: ({ node, ...props }: any) => <li className="pl-1" {...props} />,
 
     a: ({ node, href, ...props }: any) => (
@@ -61,7 +61,7 @@ const MarkdownComponents = {
     ),
 
     blockquote: ({ node, ...props }: any) => (
-        <blockquote className="relative pl-6 py-4 my-8 bg-gray-50 rounded-r-lg text-gray-700 border-l-4 border-var-color-5 shadow-sm italic" {...props}>
+        <blockquote className="relative pl-6 py-4 my-8 bg-muted rounded-r-lg text-muted-foreground border-l-4 border-var-color-5 shadow-sm italic" {...props}>
             <div className="absolute top-2 left-1 text-4xl text-var-color-5 opacity-20 font-serif">"</div>
             {props.children}
         </blockquote>
@@ -72,20 +72,20 @@ const MarkdownComponents = {
     },
 
     table: ({ node, ...props }: any) => (
-        <div className="overflow-x-auto my-8 rounded-xl border border-gray-200 shadow-md">
+        <div className="overflow-x-auto my-8 rounded-xl border border-border shadow-md">
             <table className="w-full text-left border-collapse bg-white text-sm md:text-base" {...props} />
         </div>
     ),
-    thead: ({ node, ...props }: any) => <thead className="bg-gray-50 border-b border-gray-200" {...props} />,
-    th: ({ node, ...props }: any) => <th className="p-4 font-bold text-gray-900 tracking-wider whitespace-nowrap" {...props} />,
-    tr: ({ node, ...props }: any) => <tr className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors last:border-0" {...props} />,
-    td: ({ node, ...props }: any) => <td className="p-4 text-gray-600 align-top" {...props} />,
+    thead: ({ node, ...props }: any) => <thead className="bg-muted border-b border-border" {...props} />,
+    th: ({ node, ...props }: any) => <th className="p-4 font-bold text-foreground tracking-wider whitespace-nowrap" {...props} />,
+    tr: ({ node, ...props }: any) => <tr className="border-b border-gray-100 hover:bg-muted/50 transition-colors last:border-0" {...props} />,
+    td: ({ node, ...props }: any) => <td className="p-4 text-muted-foreground align-top" {...props} />,
 
     img: ({ node, alt, ...props }: any) => (
         <figure className="my-10 flex flex-col items-center">
             <ZoomImage alt={alt} {...props} />
             {alt && (
-                <figcaption className="text-center text-sm text-gray-500 mt-3 font-medium flex items-center gap-1.5">
+                <figcaption className="text-center text-sm text-muted-foreground mt-3 font-medium flex items-center gap-1.5">
                     <span className="w-1 h-1 rounded-full bg-gray-400"></span>
                     {alt}
                     <span className="w-1 h-1 rounded-full bg-gray-400"></span>
@@ -121,8 +121,11 @@ function flattenTree(nodes: any[]): NavItem[] {
     })
     return result
 }
+type DocPageProps = {
+    params: Promise<{ slug?: string[] }>
+}
 
-export async function generateMetadata({ params }: { params: { slug?: string[] } }) {
+export async function generateMetadata({ params }: DocPageProps) {
     const { slug } = await params
 
     if (!slug || slug.length === 0) return { title: 'Documentation | HnuSec' }
@@ -142,12 +145,12 @@ export async function generateMetadata({ params }: { params: { slug?: string[] }
     }
 }
 
-export default async function DocPage({ params }: { params: { slug?: string[] } }) {
+export default async function DocPage({ params }: DocPageProps) {
     const { slug } = await params
 
     if (!slug || slug.length === 0) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-[#f0f0f5]">
+            <div className="min-h-screen flex items-center justify-center bg-background">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold mb-4">Documentation Index</h1>
                     <p>Please select a document.</p>
@@ -163,7 +166,7 @@ export default async function DocPage({ params }: { params: { slug?: string[] } 
     } catch (error: any) {
         console.error("Error loading doc:", error)
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center bg-[#f0f0f5] p-4 text-center">
+            <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4 text-center">
                 <h1 className="text-2xl font-bold text-red-600 mb-4">Documentation Error</h1>
                 <p className="mb-4">Could not load document: {slug.join('/')}</p>
                 <div className="bg-gray-100 p-4 rounded text-left text-sm font-mono overflow-auto max-w-full">
@@ -225,7 +228,7 @@ export default async function DocPage({ params }: { params: { slug?: string[] } 
     }
 
     return (
-        <main className="relative min-h-screen bg-[#f0f0f5] text-black">
+        <main className="relative min-h-screen bg-background text-foreground">
             <MouseTrail />
             <TerminalButton />
             <CyberParticles />
@@ -265,7 +268,7 @@ export default async function DocPage({ params }: { params: { slug?: string[] } 
                     </div>
 
                     {/* Breadcrumb - Moved to keep layout clean */}
-                    <div className="hidden lg:flex items-center gap-1 text-sm text-gray-500 font-mono">
+                    <div className="hidden lg:flex items-center gap-1 text-sm text-muted-foreground font-mono">
                         <FileText className="w-4 h-4" />
                         <span>docs</span>
                         {slug.map((s, i) => (
@@ -288,12 +291,12 @@ export default async function DocPage({ params }: { params: { slug?: string[] } 
                                     <Tag className="w-3 h-3" />
                                     {dirInfo.name}
                                 </span>
-                                <span className="flex items-center gap-1 text-sm text-gray-500">
+                                <span className="flex items-center gap-1 text-sm text-muted-foreground">
                                     <Clock className="w-4 h-4" />
                                     约 {readingTime} 分钟阅读
                                 </span>
                             </div>
-                            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 flex items-center gap-3">
+                            <h1 className="text-2xl md:text-3xl font-bold text-foreground flex items-center gap-3">
                                 <BookOpen className="w-7 h-7 text-var-color-5 shrink-0" />
                                 {docTitle}
                             </h1>
@@ -316,13 +319,13 @@ export default async function DocPage({ params }: { params: { slug?: string[] } 
                                     {prevItem ? (
                                         <Link
                                             href={prevItem.path}
-                                            className="group flex flex-col items-start p-4 bg-white border border-gray-200 rounded-xl hover:border-var-color-5 transition-all hover:shadow-md"
+                                            className="group flex flex-col items-start p-4 bg-white border border-border rounded-xl hover:border-var-color-5 transition-all hover:shadow-md"
                                         >
-                                            <span className="text-xs text-gray-400 mb-1 flex items-center group-hover:text-var-color-5">
+                                            <span className="text-xs text-muted-foreground mb-1 flex items-center group-hover:text-var-color-5">
                                                 <ChevronLeft className="w-3 h-3 mr-1" />
                                                 PREVIOUS
                                             </span>
-                                            <span className="font-bold text-gray-700 group-hover:text-var-color-5 line-clamp-1">
+                                            <span className="font-bold text-muted-foreground group-hover:text-var-color-5 line-clamp-1">
                                                 {prevItem.title}
                                             </span>
                                         </Link>
@@ -333,13 +336,13 @@ export default async function DocPage({ params }: { params: { slug?: string[] } 
                                     {nextItem ? (
                                         <Link
                                             href={nextItem.path}
-                                            className="group flex flex-col items-end text-right p-4 bg-white border border-gray-200 rounded-xl hover:border-var-color-5 transition-all hover:shadow-md"
+                                            className="group flex flex-col items-end text-right p-4 bg-white border border-border rounded-xl hover:border-var-color-5 transition-all hover:shadow-md"
                                         >
-                                            <span className="text-xs text-gray-400 mb-1 flex items-center group-hover:text-var-color-5">
+                                            <span className="text-xs text-muted-foreground mb-1 flex items-center group-hover:text-var-color-5">
                                                 NEXT
                                                 <ChevronRight className="w-3 h-3 ml-1" />
                                             </span>
-                                            <span className="font-bold text-gray-700 group-hover:text-var-color-5 line-clamp-1">
+                                            <span className="font-bold text-muted-foreground group-hover:text-var-color-5 line-clamp-1">
                                                 {nextItem.title}
                                             </span>
                                         </Link>

@@ -1,6 +1,17 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+type Particle = {
+  x: number
+  y: number
+  size: number
+  speedX: number
+  speedY: number
+  color: string
+  alpha: number
+  update: () => void
+  draw: (ctx: CanvasRenderingContext2D) => void
+}
 
 export function CyberParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -10,19 +21,20 @@ export function CyberParticles() {
   const isActiveRef = useRef(true)
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const canvasNode = canvasRef.current
+    if (!canvasNode) return
 
-    const ctx = canvas.getContext("2d", { alpha: true })
+    const canvasElement: HTMLCanvasElement = canvasNode
+    const ctx = canvasElement.getContext("2d", { alpha: true })
     if (!ctx) return
 
     // Set canvas size with device pixel ratio for sharper rendering
     const setCanvasSize = () => {
       const dpr = window.devicePixelRatio || 1
-      canvas.width = window.innerWidth * dpr
-      canvas.height = window.innerHeight * dpr
-      canvas.style.width = `${window.innerWidth}px`
-      canvas.style.height = `${window.innerHeight}px`
+      canvasElement.width = window.innerWidth * dpr
+      canvasElement.height = window.innerHeight * dpr
+      canvasElement.style.width = `${window.innerWidth}px`
+      canvasElement.style.height = `${window.innerHeight}px`
       ctx.scale(dpr, dpr)
     }
 
@@ -41,43 +53,35 @@ export function CyberParticles() {
     window.addEventListener("resize", handleResize)
 
     // Particle class with optimized methods
-    class Particle {
-      x: number
-      y: number
-      size: number
-      speedX: number
-      speedY: number
-      color: string
-      alpha: number
+    const createParticle = (): Particle => {
+      const particle: Particle = {
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: Math.random() * 2 + 0.5,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3,
+        alpha: Math.random() * 0.3 + 0.1,
+        color: "",
+        update: () => {
+          particle.x += particle.speedX
+          particle.y += particle.speedY
 
-      constructor() {
-        this.x = Math.random() * window.innerWidth
-        this.y = Math.random() * window.innerHeight
-        this.size = Math.random() * 2 + 0.5 // Smaller particles for better performance
-        this.speedX = (Math.random() - 0.5) * 0.3 // Slower movement for better performance
-        this.speedY = (Math.random() - 0.5) * 0.3
-        this.alpha = Math.random() * 0.3 + 0.1
-        this.color = `rgba(107, 107, 255, ${this.alpha})`
+          if (particle.x > window.innerWidth) particle.x = 0
+          else if (particle.x < 0) particle.x = window.innerWidth
+
+          if (particle.y > window.innerHeight) particle.y = 0
+          else if (particle.y < 0) particle.y = window.innerHeight
+        },
+        draw: (drawContext: CanvasRenderingContext2D) => {
+          drawContext.fillStyle = particle.color
+          drawContext.beginPath()
+          drawContext.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
+          drawContext.fill()
+        },
       }
 
-      update() {
-        this.x += this.speedX
-        this.y += this.speedY
-
-        // Wrap around edges instead of bouncing for better performance
-        if (this.x > window.innerWidth) this.x = 0
-        else if (this.x < 0) this.x = window.innerWidth
-
-        if (this.y > window.innerHeight) this.y = 0
-        else if (this.y < 0) this.y = window.innerHeight
-      }
-
-      draw(ctx: CanvasRenderingContext2D) {
-        ctx.fillStyle = this.color
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.fill()
-      }
+      particle.color = `rgba(107, 107, 255, ${particle.alpha})`
+      return particle
     }
 
     // Create particles
@@ -87,7 +91,7 @@ export function CyberParticles() {
       const particleCount = Math.min(40, Math.floor(window.innerWidth / 40))
 
       for (let i = 0; i < particleCount; i++) {
-        particlesRef.current.push(new Particle())
+        particlesRef.current.push(createParticle())
       }
     }
 
@@ -125,7 +129,7 @@ export function CyberParticles() {
       }
 
       if (!ctx) return
-      ctx.clearRect(0, 0, canvas.width / (window.devicePixelRatio || 1), canvas.height / (window.devicePixelRatio || 1))
+      ctx.clearRect(0, 0, canvasElement.width / (window.devicePixelRatio || 1), canvasElement.height / (window.devicePixelRatio || 1))
 
       const particles = particlesRef.current
       for (let i = 0; i < particles.length; i++) {
@@ -156,7 +160,7 @@ export function CyberParticles() {
       { threshold: 0.1 },
     )
 
-    observer.observe(canvas)
+    observer.observe(canvasElement)
 
     return () => {
       window.removeEventListener("resize", handleResize)

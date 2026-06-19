@@ -60,12 +60,12 @@ function CompetitionCard({
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-2">
-            <h3 className="font-bold text-xl text-gray-900">{title}</h3>
+            <h3 className="font-bold text-xl text-foreground">{title}</h3>
             <span className={`px-2 py-0.5 rounded text-xs font-medium ${statusColors[status]}`}>
               {statusLabels[status]}
             </span>
           </div>
-          <div className="flex items-center gap-4 text-sm text-gray-500 mb-2">
+          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
             <span className="flex items-center gap-1">
               <Calendar className="w-3.5 h-3.5" />
               {date}
@@ -77,9 +77,9 @@ function CompetitionCard({
               </span>
             )}
           </div>
-          <p className="text-gray-600">{description}</p>
+          <p className="text-muted-foreground">{description}</p>
         </div>
-        <ArrowRight className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" />
+        <ArrowRight className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-1" />
       </div>
     </motion.div>
   )
@@ -117,7 +117,7 @@ export default function HnuCTFPage() {
   ]
 
   return (
-    <main className="relative min-h-screen bg-[#f0f0f5] text-black">
+    <main className="relative min-h-screen bg-background text-foreground">
       <MouseTrail />
       <TerminalButton />
       <CyberParticles />
@@ -149,7 +149,7 @@ export default function HnuCTFPage() {
               <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6">
                 Hnu<span className="text-var-color-5">CTF</span>
               </h1>
-              <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-2xl mx-auto mb-4">
+              <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-2xl mx-auto mb-4">
                 海南大学网络安全竞赛平台
               </p>
               <p className="text-lg md:text-xl text-var-color-5 font-medium">
@@ -168,7 +168,7 @@ export default function HnuCTFPage() {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Infinity, duration: 1.5 }}
-              className="flex flex-col items-center gap-2 text-gray-400"
+              className="flex flex-col items-center gap-2 text-muted-foreground"
             >
               <ChevronDown className="w-6 h-6" />
             </motion.div>
@@ -200,8 +200,8 @@ export default function HnuCTFPage() {
                 className="text-center"
               >
                 <stat.icon className="w-6 h-6 text-var-color-5 mx-auto mb-2" />
-                <div className="text-3xl font-bold text-gray-900">{stat.value}</div>
-                <div className="text-sm text-gray-500">{stat.label}</div>
+                <div className="text-3xl font-bold text-foreground">{stat.value}</div>
+                <div className="text-sm text-muted-foreground">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -213,7 +213,7 @@ export default function HnuCTFPage() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-foreground mb-8 flex items-center gap-2">
             <Target className="w-6 h-6 text-var-color-5" />
             比赛方向
           </h2>
@@ -231,8 +231,8 @@ export default function HnuCTFPage() {
                 <div className="w-14 h-14 mx-auto rounded-xl bg-var-color-5/10 flex items-center justify-center mb-3">
                   <cat.icon className="w-7 h-7 text-var-color-5" />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-1">{cat.title}</h3>
-                <p className="text-sm text-gray-500">{cat.description}</p>
+                <h3 className="font-bold text-foreground mb-1">{cat.title}</h3>
+                <p className="text-sm text-muted-foreground">{cat.description}</p>
               </motion.div>
             ))}
           </div>
@@ -245,7 +245,7 @@ export default function HnuCTFPage() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
             <Calendar className="w-6 h-6 text-var-color-5" />
             历届赛事
           </h2>
@@ -263,8 +263,8 @@ export default function HnuCTFPage() {
           viewport={{ once: true }}
           className="bg-gradient-to-r from-var-color-5/10 to-var-color-4/10 rounded-2xl border border-var-color-5/20 p-8 text-center"
         >
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">准备好挑战了吗？</h2>
-          <p className="text-gray-600 mb-6">加入 HnuSec，参与下一届 HnuCTF 比赛！</p>
+          <h2 className="text-2xl font-bold text-foreground mb-4">准备好挑战了吗？</h2>
+          <p className="text-muted-foreground mb-6">加入 HnuSec，参与下一届 HnuCTF 比赛！</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/recruitment/2026-winter"

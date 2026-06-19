@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { variants as motionVariants, staggerContainer } from "@/lib/motion";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -352,27 +353,11 @@ export default function MembersPage() {
   };
 
   // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-    },
-  };
+  const containerVariants = staggerContainer(0.05, 0.1);
+  const itemVariants = motionVariants.fadeInUp;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#f0f0f5] to-[#e8e8f0] text-black select-none">
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-background to-muted text-foreground select-none">
       {/* Full-page background animation with reduced opacity for better contrast */}
       <div className="fixed inset-0 z-0 opacity-70">
         <CyberParticles />
@@ -392,7 +377,7 @@ export default function MembersPage() {
           variant="outline"
           size="sm"
           onClick={handleBackClick}
-          className="border-var-color-5/30 bg-var-color-3/70 text-black backdrop-blur-sm hover:bg-var-color-4/50 shadow-sm"
+          className="border-var-color-5/30 bg-var-color-3/70 text-foreground backdrop-blur-sm hover:bg-var-color-4/50 shadow-sm"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Home
@@ -409,7 +394,7 @@ export default function MembersPage() {
           <h1 className="text-5xl font-bold md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-var-color-5 to-blue-600">
             团队成员
           </h1>
-          <p className="mt-4 text-lg text-black/80 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-foreground/80 max-w-2xl mx-auto">
             HNUSEC网络安全团队的优秀成员，共同致力于网络安全研究与实践
           </p>
         </motion.div>
@@ -423,7 +408,7 @@ export default function MembersPage() {
                 onClick={() => scrollToYear(year)}
                 className={`px-4 sm:px-8 py-2 sm:py-3 text-base sm:text-lg font-mono transition-all ${activeYear === year
                     ? "bg-var-color-5/20 font-medium text-var-color-5 shadow-inner"
-                    : "text-black hover:bg-var-color-5/10"
+                    : "text-foreground hover:bg-var-color-5/10"
                   }`}
               >
                 {year}级
@@ -457,8 +442,8 @@ export default function MembersPage() {
             <motion.div
               className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
               variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
+              initial="initial"
+              whileInView="animate"
               viewport={{ once: true, margin: "-100px" }}
             >
               {membersByYear[year].map((member) => (

@@ -105,7 +105,7 @@ export function SecurityCommandDisplay() {
         <Terminal className="h-5 w-5 text-var-color-5 mr-2" />
         <div className="text-sm font-medium text-var-color-5">Security Tools</div>
       </div>
-      <div className="font-mono dark:text-white text-black flex items-center">
+      <div className="font-mono text-foreground flex items-center">
         <span className="text-var-color-5 mr-2">$</span>
         <div className="overflow-hidden whitespace-nowrap">
           <span>{displayedText}</span>

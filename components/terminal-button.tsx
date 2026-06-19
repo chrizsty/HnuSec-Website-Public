@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
+import { variants, durations, easings } from "@/lib/motion"
 
 export function TerminalButton() {
   const router = useRouter()
@@ -27,19 +28,19 @@ export function TerminalButton() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1.5, duration: 0.5 }}
+      initial={variants.fadeInUp.initial}
+      animate={variants.fadeInUp.animate}
+      transition={{ delay: 1.5, duration: durations.base, ease: easings.smooth }}
     >
       <motion.div
         className="flex items-center space-x-2 rounded-md border border-var-color-5/30 bg-var-color-3/50 px-4 py-2 backdrop-blur-sm shadow-sm"
         animate={{
           scale: isPressed ? 0.95 : isHovered ? 1.05 : 1,
         }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: durations.fast }}
       >
         <span className="text-var-color-5">&gt;</span>
-        <span className={`${isHovered ? "text-var-color-5" : "text-black"} transition-colors duration-300`}>
+        <span className={`${isHovered ? "text-var-color-5" : "text-foreground"} transition-colors duration-300`}>
           /bin/bash
         </span>
         {isHovered && (

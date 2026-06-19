@@ -38,7 +38,7 @@ function VersionPanel({ isOpen, onClose, onExpand }: { isOpen: boolean; onClose:
                             <Shield className="w-6 h-6 text-var-color-5" />
                         </div>
                         <div>
-                            <div className="font-bold font-mono text-gray-900">HnuSec Website</div>
+                            <div className="font-bold font-mono text-foreground">HnuSec Website</div>
                             <button
                                 onClick={onExpand}
                                 className="text-sm text-orange-500 hover:text-orange-600 font-mono cursor-pointer transition-colors"
@@ -47,7 +47,7 @@ function VersionPanel({ isOpen, onClose, onExpand }: { isOpen: boolean; onClose:
                             </button>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Mail className="w-4 h-4" />
                         <span className="font-mono">hnusec@163.com</span>
                     </div>
@@ -103,18 +103,18 @@ function DetailModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                                 <Shield className="w-7 h-7 text-var-color-5" />
                             </div>
                             <div>
-                                <div className="font-bold font-mono text-lg text-gray-900">HnuSec Website</div>
+                                <div className="font-bold font-mono text-lg text-foreground">HnuSec Website</div>
                                 <div className="text-sm text-orange-500 font-mono">v2.0.1</div>
                             </div>
                         </div>
-                        <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-md hover:bg-gray-100">
+                        <button onClick={onClose} className="text-muted-foreground hover:text-muted-foreground transition-colors p-1 rounded-md hover:bg-muted">
                             <X className="w-5 h-5" />
                         </button>
                     </div>
 
                     {/* Developers */}
                     <div className="mb-5">
-                        <div className="flex items-center gap-2 text-sm text-gray-600 mb-3 font-medium">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3 font-medium">
                             <Code className="w-4 h-4 text-var-color-5" />
                             <span>Developers</span>
                         </div>
@@ -124,7 +124,7 @@ function DetailModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                                     key={dev.name}
                                     href={dev.link}
                                     target="_blank"
-                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-700 bg-gray-50 hover:bg-var-color-5/10 hover:text-var-color-5 rounded-lg transition-all duration-200 border border-gray-200 hover:border-var-color-5/30"
+                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-foreground bg-muted hover:bg-var-color-5/10 hover:text-var-color-5 rounded-lg transition-all duration-200 border border-border hover:border-var-color-5/30"
                                 >
                                     <ExternalLink className="w-3 h-3" />
                                     <span>{dev.name}</span>
@@ -135,7 +135,7 @@ function DetailModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
 
                     {/* Thanks */}
                     <div className="mb-5">
-                        <div className="flex items-center gap-2 text-sm text-gray-600 mb-3 font-medium">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3 font-medium">
                             <Heart className="w-4 h-4 text-red-400" />
                             <span>Special Thanks</span>
                         </div>
@@ -145,7 +145,7 @@ function DetailModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                                     key={t.name}
                                     href={t.link}
                                     target="_blank"
-                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-700 bg-gray-50 hover:bg-var-color-5/10 hover:text-var-color-5 rounded-lg transition-all duration-200 border border-gray-200 hover:border-var-color-5/30"
+                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-foreground bg-muted hover:bg-var-color-5/10 hover:text-var-color-5 rounded-lg transition-all duration-200 border border-border hover:border-var-color-5/30"
                                 >
                                     <ExternalLink className="w-3 h-3" />
                                     <span>{t.name}</span>
@@ -156,7 +156,7 @@ function DetailModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
 
                     {/* Technologies */}
                     <div className="mb-5">
-                        <div className="flex items-center gap-2 text-sm text-gray-600 mb-3 font-medium">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3 font-medium">
                             <Wrench className="w-4 h-4 text-cyan-500" />
                             <span>Built With</span>
                         </div>
@@ -166,7 +166,7 @@ function DetailModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                                     key={tech.name}
                                     href={tech.link}
                                     target="_blank"
-                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-600 bg-gray-50 hover:bg-var-color-5/10 hover:text-var-color-5 rounded-lg transition-all duration-200 border border-gray-200 hover:border-var-color-5/30"
+                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-muted-foreground bg-muted hover:bg-var-color-5/10 hover:text-var-color-5 rounded-lg transition-all duration-200 border border-border hover:border-var-color-5/30"
                                 >
                                     <ExternalLink className="w-3 h-3" />
                                     <span>{tech.name}</span>
@@ -176,9 +176,9 @@ function DetailModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                     </div>
 
                     {/* Footer */}
-                    <div className="pt-4 border-t border-gray-100 text-center text-sm text-gray-500">
+                    <div className="pt-4 border-t border-border text-center text-sm text-muted-foreground">
                         <p>Official website for HnuSec Team :)</p>
-                        <p className="font-mono text-xs text-gray-400 mt-1">
+                        <p className="font-mono text-xs text-muted-foreground mt-1">
                             Build time {buildTime}
                         </p>
                     </div>
@@ -196,7 +196,7 @@ export function Footer() {
     return (
         <>
             <footer className="relative z-20 py-4 text-center">
-                <div className="flex items-center justify-center gap-2 text-sm text-gray-500 font-mono flex-wrap">
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground font-mono flex-wrap">
                     <Shield className="w-4 h-4 text-var-color-5" />
                     <span>© {currentYear}</span>
                     <span className="text-var-color-5 font-medium">HnuSec Team</span>

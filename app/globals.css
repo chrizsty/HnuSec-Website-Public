@@ -4,31 +4,60 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
-    --card: 0 0% 0%;
-    --card-foreground: 0 0% 100%;
-    --popover: 0 0% 0%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 70%;
-    --accent: 0 0% 10%;
-    --accent-foreground: 0 0% 100%;
+    /* shadcn semantic tokens — HSL (opacity modifiers need HSL channels) */
+    --background: 240 30% 96%; /* = #f0f0f5, light neutral */
+    --foreground: 240 10% 4%; /* near-black text */
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 4%;
+    --primary: 240 100% 71%; /* = #6b6bff brand */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 36% 87%; /* = #d6d6e6 */
+    --secondary-foreground: 240 10% 4%;
+    --muted: 240 20% 93%;
+    --muted-foreground: 240 5% 40%;
+    --accent: 240 100% 82%; /* = #a3a3ff */
+    --accent-foreground: 240 10% 4%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 30%;
-    --input: 0 0% 30%;
-    --ring: 0 0% 100%;
+    --border: 240 20% 85%;
+    --input: 240 20% 85%;
+    --ring: 240 100% 71%;
     --radius: 0.5rem;
-
-    /* Custom color palette */
+    /* Brand palette (hex, feeds var-color-* utilities) */
     --color-1: #ffffff;
     --color-2: #f0f0f5;
     --color-3: #d6d6e6;
+    --color-4: #a3a3ff;
+    --color-5: #6b6bff;
+  }
+
+  .dark {
+    /* Dark theme: brand colors unchanged, only neutral luminance flipped */
+    --background: 240 20% 8%;
+    --foreground: 240 30% 96%;
+    --card: 240 18% 12%;
+    --card-foreground: 240 30% 96%;
+    --popover: 240 18% 12%;
+    --popover-foreground: 240 30% 96%;
+    --primary: 240 100% 71%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 18% 20%;
+    --secondary-foreground: 240 30% 96%;
+    --muted: 240 15% 16%;
+    --muted-foreground: 240 10% 65%;
+    --accent: 240 100% 82%;
+    --accent-foreground: 240 30% 96%;
+    --destructive: 0 62.8% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 15% 25%;
+    --input: 240 15% 25%;
+    --ring: 240 100% 71%;
+    /* Dark neutral palette: flip 1/2/3 luminance, keep brand 4/5 */
+    --color-1: #0d0d12;
+    --color-2: #14141c;
+    --color-3: #2a2a38;
     --color-4: #a3a3ff;
     --color-5: #6b6bff;
   }
@@ -106,28 +135,6 @@
   border-color: var(--color-5);
 }
 
-/* Color inversion for dark mode */
-.inverted {
-  filter: invert(1) hue-rotate(180deg);
-  transition: filter 0.5s ease;
-}
-
-/* Don't invert images and videos */
-.inverted img,
-.inverted video {
-  filter: invert(1) hue-rotate(180deg);
-  transition: filter 0.5s ease;
-}
-
-/* Fix button colors in dark mode - double invert to keep original colors */
-.inverted .btn-no-invert {
-  filter: invert(1) hue-rotate(180deg);
-}
-
-/* Add transition to html element for smooth dark mode toggle */
-html {
-  transition: filter 0.5s ease;
-}
 
 .crt::before {
   content: " ";

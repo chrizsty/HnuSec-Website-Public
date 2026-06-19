@@ -2,11 +2,11 @@ export function AsciiArt({ art }: { art: string }) {
   switch (art) {
     case "hnusec":
       return (
-        <pre className="text-[#6B6BFF] whitespace-pre overflow-x-auto text-xs sm:text-sm md:text-base font-mono">
+        <pre className="text-var-color-5 whitespace-pre overflow-x-auto text-xs sm:text-sm md:text-base font-mono">
           {`
 ██╗  ██╗███╗   ██╗██╗   ██╗███████╗███████╗ ██████╗
 ██║  ██║████╗  ██║██║   ██║██╔════╝██╔════╝██╔════╝
-███████║██╔██╗ ██║██║   ██║███████╗█████╗  ██║     
+███████║██╔██╗ ██║██║   ██║███████║█████╗  ██║     
 ██╔══██║██║╚██╗██║██║   ██║╚════██║██╔══╝  ██║     
 ██║  ██║██║ ╚████║╚██████╔╝███████║███████╗╚██████╗
 ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚══════╝ ╚═════╝
@@ -15,11 +15,11 @@ export function AsciiArt({ art }: { art: string }) {
       )
     case "welcome":
       return (
-        <pre className="text-[#6B6BFF] whitespace-pre overflow-x-auto text-xs sm:text-sm md:text-base font-mono">
+        <pre className="text-var-color-5 whitespace-pre overflow-x-auto text-xs sm:text-sm md:text-base font-mono">
           {`
 ██╗  ██╗███╗   ██╗██╗   ██╗███████╗███████╗ ██████╗
 ██║  ██║████╗  ██║██║   ██║██╔════╝██╔════╝██╔════╝
-███████║██╔██╗ ██║██║   ██║███████╗█████╗  ██║     
+███████║██╔██╗ ██║██║   ██║███████║█████╗  ██║     
 ██╔══██║██║╚██╗██║██║   ██║╚════██║██╔══╝  ██║     
 ██║  ██║██║ ╚████║╚██████╔╝███████║███████╗╚██████╗
 ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚══════╝ ╚═════╝
@@ -28,11 +28,11 @@ export function AsciiArt({ art }: { art: string }) {
       )
     case "about":
       return (
-        <pre className="text-[#6B6BFF] whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
+        <pre className="text-var-color-5 whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
           {`
 ██╗  ██╗███╗   ██╗██╗   ██╗███████╗███████╗ ██████╗
 ██║  ██║████╗  ██║██║   ██║██╔════╝██╔════╝██╔════╝
-███████║██╔██╗ ██║██║   ██║███████╗█████╗  ██║     
+███████║██╔██╗ ██║██║   ██║███████║█████╗  ██║     
 ██╔══██║██║╚██╗██║██║   ██║╚════██║██╔══╝  ██║     
 ██║  ██║██║ ╚████║╚██████╔╝███████║███████╗╚██████╗
 ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚══════╝ ╚═════╝
@@ -41,7 +41,7 @@ export function AsciiArt({ art }: { art: string }) {
       )
     case "education":
       return (
-        <pre className="text-[#6B6BFF] whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
+        <pre className="text-var-color-5 whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
           {`
 _____    _                 _   _             
 | ____|__| |_   _  ___ __ _| |_(_) ___  _ __  
@@ -54,7 +54,7 @@ _____    _                 _   _
       )
     case "skills":
       return (
-        <pre className="text-[#6B6BFF] whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
+        <pre className="text-var-color-5 whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
           {`
 ____  _    _ _ _     
 / ___|| | _(_) | |___ 
@@ -67,7 +67,7 @@ ___) |   <| | | \\__ \\
       )
     case "experience":
       return (
-        <pre className="text-[#6B6BFF] whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
+        <pre className="text-var-color-5 whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
           {`
 _____                      _                      
 | ____|_  ___ __   ___ _ __(_) ___ _ __   ___ ___ 
@@ -80,7 +80,7 @@ _____                      _
       )
     case "projects":
       return (
-        <pre className="text-[#6B6BFF] whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
+        <pre className="text-var-color-5 whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
           {`
 ____            _           _       
 |  _ \\ _ __ ___ (_) ___  ___| |_ ___ 
@@ -93,7 +93,7 @@ ____            _           _
       )
     case "certifications":
       return (
-        <pre className="text-[#6B6BFF] whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
+        <pre className="text-var-color-5 whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
           {`
  ____           _   _  __ _           _   _                 
 / ___|___ _ __ | |_(_)/ _(_) ___ __ _| |_(_) ___  _ __  ___ 
@@ -107,7 +107,7 @@ ____            _           _
 
     case "honors":
       return (
-        <pre className="text-[#6B6BFF] whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
+        <pre className="text-var-color-5 whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
           {`
 _   _                           
 | | | | ___  _ __   ___  _ __ ___ 
@@ -120,7 +120,7 @@ _   _
       )
     case "contact":
       return (
-        <pre className="text-[#6B6BFF] whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
+        <pre className="text-var-color-5 whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
           {`
  ____            _             _   
 / ___|___  _ __ | |_ __ _  ___| |_ 
@@ -133,7 +133,7 @@ _   _
       )
     case "links":
       return (
-        <pre className="text-[#6B6BFF] whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
+        <pre className="text-var-color-5 whitespace-pre overflow-x-auto text-xs sm:text-sm font-mono">
           {`
  _     _       _        
 | |   (_)_ __ | | _____ 

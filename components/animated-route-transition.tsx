@@ -2,6 +2,7 @@
 
 import { type ReactNode, useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import { pageTransition } from "@/lib/motion"
 import { usePathname } from "next/navigation"
 import { PageTransitionWithTheme } from "./page-transition-with-theme"
 
@@ -40,14 +41,11 @@ export function AnimatedRouteTransition({ children }: AnimatedRouteTransitionPro
     <PageTransitionWithTheme>
       <motion.div
         key={pathname}
-        initial={{ opacity: isFirstRender ? 1 : 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{
-          duration: 0.2,
-          ease: "easeInOut",
-        }}
-        className="min-h-screen bg-[#f0f0f5]"
+        initial={isFirstRender ? false : "initial"}
+        animate="animate"
+        exit="exit"
+        variants={pageTransition}
+        className="min-h-screen bg-background text-foreground"
       >
         {isRouteChanging ? displayChildren : children}
       </motion.div>

@@ -306,7 +306,7 @@ export function ArticlesOverlay({ isOpen, onClose }: ArticlesOverlayProps) {
 
           {/* Overlay panel */}
           <motion.div
-            className="fixed inset-y-0 right-0 z-50 w-full max-w-2xl bg-[#f0f0f5]/90 backdrop-blur-md shadow-lg border-l border-var-color-5/30 overflow-hidden flex flex-col"
+            className="fixed inset-y-0 right-0 z-50 w-full max-w-2xl bg-background/90 backdrop-blur-md shadow-lg border-l border-var-color-5/30 overflow-hidden flex flex-col"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -328,7 +328,7 @@ export function ArticlesOverlay({ isOpen, onClose }: ArticlesOverlayProps) {
             {/* Search and filter */}
             <div className="border-b border-var-color-5/30 p-4 space-y-3">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="text"
                   placeholder="搜索文章..."
@@ -383,7 +383,7 @@ export function ArticlesOverlay({ isOpen, onClose }: ArticlesOverlayProps) {
             {/* Content */}
             <div className="flex-1 p-4 overflow-y-auto">
               {filteredArticles.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-gray-500">
+                <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
                   <p>没有找到匹配的文章</p>
                   <Button
                     variant="link"
@@ -413,13 +413,13 @@ export function ArticlesOverlay({ isOpen, onClose }: ArticlesOverlayProps) {
                         className="block p-4 rounded-lg border border-var-color-5/20 bg-white/50 hover:bg-var-color-5/10 transition-colors"
                       >
                         <div className="flex justify-between items-start">
-                          <h3 className="font-medium text-black group-hover:text-var-color-5 transition-colors">
+                          <h3 className="font-medium text-foreground group-hover:text-var-color-5 transition-colors">
                             {article.title}
                           </h3>
                           <ExternalLink className="h-4 w-4 text-var-color-5 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 transition-transform flex-shrink-0 ml-2" />
                         </div>
 
-                        <div className="mt-3 flex flex-wrap items-center text-xs text-gray-600 gap-x-4 gap-y-2">
+                        <div className="mt-3 flex flex-wrap items-center text-xs text-muted-foreground gap-x-4 gap-y-2">
                           <div className="flex items-center">
                             <Calendar className="h-3 w-3 mr-1" />
                             {article.date}
@@ -449,12 +449,12 @@ export function ArticlesOverlay({ isOpen, onClose }: ArticlesOverlayProps) {
             </div>
 
             {/* Pagination */}
-            <div className="border-t border-var-color-5/30 p-4 bg-[#f0f0f5]/90 backdrop-blur-md flex items-center justify-between">
-              <div className="text-sm text-black/70">
+            <div className="border-t border-var-color-5/30 p-4 bg-background/90 backdrop-blur-md flex items-center justify-between">
+              <div className="text-sm text-foreground/70">
                 {filteredArticles.length > 0 ? (
                   <>
                     第 {currentPage} 页，共 {totalPages} 页
-                    <span className="ml-2 text-xs text-gray-500">
+                    <span className="ml-2 text-xs text-muted-foreground">
                       (共 {filteredArticles.length} 篇文章)
                     </span>
                   </>

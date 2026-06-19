@@ -1,8 +1,8 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect, useRef, memo } from "react"
-import { motion, useAnimation } from "framer-motion"
+import { useState, memo } from "react"
+import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { MouseTrail } from "@/components/mouse-trail"
 import { TerminalButton } from "@/components/terminal-button"
@@ -24,6 +24,7 @@ import { RandomTitle } from "@/components/random-title"
 import { CyberParticles } from "@/components/cyber-particles"
 import { BackgroundDecoration } from "@/components/background-decoration"
 import { LastUpdated } from "@/components/last-updated"
+import { SiteBackground } from "@/components/site-background"
 
 // Reuse InteractiveButton
 const InteractiveButton = memo(function InteractiveButton({
@@ -42,44 +43,24 @@ const InteractiveButton = memo(function InteractiveButton({
     const [isHovered, setIsHovered] = useState(false)
     return (
         <motion.button
-            className={`group relative flex items-center space-x-2 rounded-md border-2 ${isAccent ? 'border-var-color-5 bg-var-color-5 hover:bg-var-color-5/80 text-white' : 'border-var-color-5/50 bg-var-color-3/70 hover:bg-var-color-4/50 text-black'} px-6 py-3 shadow-md transition-colors overflow-hidden justify-center ${className}`}
+            className={`group relative flex items-center space-x-2 rounded-md border-2 ${isAccent ? 'border-var-color-5 bg-var-color-5 hover:bg-var-color-5/80 text-white' : 'border-var-color-5/50 bg-var-color-3/70 hover:bg-var-color-4/50 text-foreground'} px-6 py-3 shadow-md transition-colors overflow-hidden justify-center ${className}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={onClick}
             whileTap={{ scale: 0.95 }}
         >
             <Icon className={`h-5 w-5 mr-2 ${isAccent ? 'text-white' : 'text-var-color-5'}`} />
-            <span className={`font-medium ${isAccent ? 'text-white' : 'text-black'}`}>{label}</span>
+            <span className={`font-medium ${isAccent ? 'text-white' : 'text-foreground'}`}>{label}</span>
         </motion.button>
     )
 })
 
 const AnimatedBackground = memo(function AnimatedBackground() {
-    return (
-        <div className="fixed inset-0 z-0 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#f0f0f5] to-[#e8e8f0]"></div>
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNMzAgMzBoMzB2MzBIMzB6TTAgMzBoMzB2MzBIMHoiIGZpbGw9IiM2YjZiZmYwNSIgZmlsbC1vcGFjaXR5PSIuMDUiLz48cGF0aCBkPSJNMzAgMGgzMHYzMEgzMHpNMCAwaDMwdjMwSDB6IiBmaWxsPSIjNmI2YmZmMDUiIGZpbGwtb3BhY2l0eT0iLjA1Ii8+PC9nPjwvc3ZnPg==')] opacity-30"></div>
-        </div>
-    )
+    return <SiteBackground />
 })
 
 export default function Archive2025SummerPage() {
     const router = useRouter()
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-    const containerRef = useRef<HTMLDivElement>(null)
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            if (!containerRef.current) return
-            const rect = containerRef.current.getBoundingClientRect()
-            setMousePosition({
-                x: (e.clientX - rect.left) / rect.width - 0.5,
-                y: (e.clientY - rect.top) / rect.height - 0.5,
-            })
-        }
-        window.addEventListener("mousemove", handleMouseMove)
-        return () => window.removeEventListener("mousemove", handleMouseMove)
-    }, [])
 
     const schedule = [
         { date: "7月15日", course: "开营仪式", content: "介绍培训计划与方向", teacher: "Team" },
@@ -135,7 +116,7 @@ export default function Archive2025SummerPage() {
     ]
 
     return (
-        <main className="relative min-h-screen overflow-hidden bg-[#f0f0f5] text-black select-none">
+        <main className="relative min-h-screen overflow-hidden bg-background text-foreground select-none">
             <MouseTrail />
             <TerminalButton />
             <CyberParticles />
@@ -143,7 +124,6 @@ export default function Archive2025SummerPage() {
             <AnimatedBackground />
 
             <div
-                ref={containerRef}
                 className="relative z-10 flex flex-col min-h-screen px-4 py-8 md:px-12 lg:px-20 overflow-y-auto"
             >
                 <motion.div
@@ -181,7 +161,7 @@ export default function Archive2025SummerPage() {
                         <BookOpen className="w-6 h-6 mr-2 text-orange-600" />
                         <h3 className="text-xl font-bold text-orange-900">培训概述</h3>
                     </div>
-                    <p className="text-lg leading-relaxed text-gray-800">
+                    <p className="text-lg leading-relaxed text-foreground">
                         2025年夏季培训内容归档。涵盖WEB、PWN、CRYPTO、REVERSE、MISC等方向的基础与进阶内容。
                     </p>
                 </motion.div>
@@ -252,7 +232,7 @@ export default function Archive2025SummerPage() {
                                         <li key={i}>
                                             <a
                                                 href={item.link}
-                                                className="flex items-center text-sm text-gray-700 hover:text-orange-600 cursor-pointer transition-colors"
+                                                className="flex items-center text-sm text-muted-foreground hover:text-orange-600 cursor-pointer transition-colors"
                                             >
                                                 <ChevronRight className="w-3 h-3 mr-1 opacity-50" />
                                                 <span>{item.text}</span>

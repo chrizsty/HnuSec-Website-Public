@@ -53,7 +53,7 @@ export default function TerminalPage() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#f0f0f5]">
+    <main className="relative min-h-screen overflow-hidden bg-background text-foreground">
       {/* Full-page background animation */}
       <div className="fixed inset-0 z-0">
         <CyberParticles />
@@ -70,7 +70,7 @@ export default function TerminalPage() {
           variant="outline"
           size="sm"
           onClick={handleBackClick}
-          className="border-var-color-5/30 bg-var-color-3/50 text-gray-900 backdrop-blur-sm hover:bg-var-color-4/30"
+          className="border-var-color-5/30 bg-var-color-3/50 text-foreground backdrop-blur-sm hover:bg-var-color-4/30"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Home

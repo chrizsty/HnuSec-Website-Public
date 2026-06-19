@@ -6,7 +6,7 @@ import { motion, useAnimation } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { MouseTrail } from "@/components/mouse-trail"
 import { TerminalButton } from "@/components/terminal-button"
-import SpotlightCard from "@/components/spotlight-card"
+import SpotlightCard from "@/components/SpotlightCard"
 import {
     Home,
     User,
@@ -149,7 +149,7 @@ const InteractiveButton = memo(function InteractiveButton({
     return (
         <motion.button
             ref={buttonRef}
-            className={`group relative flex items-center space-x-2 rounded-md border-2 ${isAccent ? 'border-var-color-5 bg-var-color-5 hover:bg-var-color-5/80 text-white' : 'border-var-color-5/50 bg-var-color-3/70 hover:bg-var-color-4/50 text-black'} px-6 py-3 shadow-md transition-colors overflow-hidden min-w-[120px] justify-center ${className}`}
+            className={`group relative flex items-center space-x-2 rounded-md border-2 ${isAccent ? 'border-var-color-5 bg-var-color-5 hover:bg-var-color-5/80 text-white' : 'border-var-color-5/50 bg-var-color-3/70 hover:bg-var-color-4/50 text-foreground'} px-6 py-3 shadow-md transition-colors overflow-hidden min-w-[120px] justify-center ${className}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onMouseMove={handleMouseMove}
@@ -190,7 +190,7 @@ const InteractiveButton = memo(function InteractiveButton({
                 className={`h-5 w-5 ${isAccent ? 'text-white' : 'text-var-color-5'} transition-transform duration-300`}
                 style={{ transform: isHovered ? "scale(1.1)" : "scale(1)" }}
             />
-            <span className={`relative z-10 font-medium ${isAccent ? 'text-white' : 'text-black'}`}>{label}</span>
+            <span className={`relative z-10 font-medium ${isAccent ? 'text-white' : 'text-foreground'}`}>{label}</span>
         </motion.button>
     )
 })
@@ -246,7 +246,7 @@ const DecorativeElements = memo(function DecorativeElements() {
 const AnimatedBackground = memo(function AnimatedBackground() {
     return (
         <div className="fixed inset-0 z-0 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#f0f0f5] to-[#e8e8f0]"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-background to-muted"></div>
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-30">
                 <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] rounded-full bg-var-color-5/20 blur-[100px] animate-float-slow"></div>
                 <div className="absolute bottom-1/3 right-1/3 w-[30vw] h-[30vw] rounded-full bg-var-color-4/20 blur-[80px] animate-float-medium"></div>
@@ -580,7 +580,7 @@ export default function ClientRecruitmentPage({ materials }: { materials: Materi
     ]
 
     return (
-        <main className="relative min-h-screen overflow-hidden bg-[#f0f0f5] text-black select-none">
+        <main className="relative min-h-screen overflow-hidden bg-background text-foreground select-none">
             <MouseTrail />
             <TerminalButton />
             <CyberParticles />
@@ -638,7 +638,7 @@ export default function ClientRecruitmentPage({ materials }: { materials: Materi
                             <BookOpen className="w-6 h-6 mr-2 text-var-color-5" />
                             <h3 className="text-xl font-bold">培训概述</h3>
                         </div>
-                        <p className="text-lg leading-relaxed text-gray-800">
+                        <p className="text-lg leading-relaxed text-foreground">
                             本次冬季培训预计于 <span className="font-bold text-var-color-5">2026年1月26日-2026年2月6日</span> 举行。培训面向海南大学24级、25级全体学生，涵盖了CTF相关的WEB、PWN、REV、CRY、MISC五个方向，旨在提升同学们的网络安全实战技能。
                         </p>
                     </motion.div>
@@ -723,7 +723,7 @@ export default function ClientRecruitmentPage({ materials }: { materials: Materi
                                                     <BookOpen className="w-3 h-3 mr-1" />
                                                     前置基础
                                                 </h5>
-                                                <ul className="list-disc list-inside text-sm text-gray-700 space-y-1 ml-1">
+                                                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1 ml-1">
                                                     {module.prerequisites.map((p, i) => (
                                                         <li key={i}>{p}</li>
                                                     ))}
@@ -738,7 +738,7 @@ export default function ClientRecruitmentPage({ materials }: { materials: Materi
                                                     <Binary className="w-3 h-3 mr-1" />
                                                     课程内容
                                                 </h5>
-                                                <ul className="list-disc list-inside text-sm text-gray-700 space-y-1 ml-1">
+                                                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1 ml-1">
                                                     {module.content.map((c, i) => (
                                                         <li key={i}>{c}</li>
                                                     ))}
@@ -753,7 +753,7 @@ export default function ClientRecruitmentPage({ materials }: { materials: Materi
                                                     <Code className="w-3 h-3 mr-1" />
                                                     作业
                                                 </h5>
-                                                <ul className="list-disc list-inside text-sm text-gray-700 space-y-1 ml-1">
+                                                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1 ml-1">
                                                     {module.homework.map((h, i) => (
                                                         <li key={i}>{h}</li>
                                                     ))}
@@ -804,7 +804,7 @@ export default function ClientRecruitmentPage({ materials }: { materials: Materi
                                                 <li key={i}>
                                                     <a
                                                         href={item.link}
-                                                        className="flex items-center text-sm text-gray-700 hover:text-var-color-5 cursor-pointer transition-colors"
+                                                        className="flex items-center text-sm text-muted-foreground hover:text-var-color-5 cursor-pointer transition-colors"
                                                     >
                                                         <ChevronRight className="w-3 h-3 mr-1 opacity-50" />
                                                         <span className="truncate">{item.text}</span>
@@ -829,8 +829,8 @@ export default function ClientRecruitmentPage({ materials }: { materials: Materi
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.9 }}
                     >
-                        <h3 className="text-2xl font-bold text-gray-900 mb-3">对网络安全感兴趣？</h3>
-                        <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+                        <h3 className="text-2xl font-bold text-foreground mb-3">对网络安全感兴趣？</h3>
+                        <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                             HnuSec 欢迎所有对网络安全充满热情的同学加入！无论你是零基础还是有经验，这里都有适合你的学习资源。
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">

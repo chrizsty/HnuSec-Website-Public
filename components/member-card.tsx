@@ -142,7 +142,7 @@ export function MemberCard({ member }: MemberCardProps) {
           />
         </div>
       </div>
-      <p className="mt-4 text-sm text-black/80">{member.intro}</p>
+      <p className="mt-4 text-sm text-foreground/80">{member.intro}</p>
       <div
         className="mt-4 flex justify-end"
         style={{

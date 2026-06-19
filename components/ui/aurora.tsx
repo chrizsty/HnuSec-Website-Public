@@ -8,6 +8,13 @@ interface AuroraProps {
   amplitude?: number
 }
 
+// Brand palette as RGB triples for canvas: #6b6bff, #a3a3ff, #d6d6e6
+const AURORA_COLORS = [
+  { r: 107, g: 107, b: 255 },
+  { r: 163, g: 163, b: 255 },
+  { r: 214, g: 214, b: 230 },
+] as const
+
 export function Aurora({
   className = "",
   speed = 1,
@@ -36,11 +43,7 @@ export function Aurora({
     window.addEventListener("resize", resize)
 
     // Colors matching your theme
-    const colors = [
-      { r: 107, g: 107, b: 255 },  // #6b6bff
-      { r: 163, g: 163, b: 255 },  // #a3a3ff
-      { r: 214, g: 214, b: 230 },  // #d6d6e6
-    ]
+    const colors = AURORA_COLORS
 
     const drawAurora = () => {
       const width = canvas.offsetWidth

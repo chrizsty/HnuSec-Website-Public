@@ -65,7 +65,7 @@ export default function BootSequence({ isMobile = false }: BootSequenceProps) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="w-full max-w-2xl rounded-md border border-var-color-5/30 bg-[#f0f0f5]/95 p-4 md:p-8 font-mono text-gray-900 backdrop-blur-sm"
+        className="w-full max-w-2xl rounded-md border border-var-color-5/30 bg-background/95 p-4 md:p-8 font-mono text-foreground backdrop-blur-sm"
         initial={{ scale: 0.9 }}
         animate={{ scale: 1 }}
         transition={{
@@ -90,7 +90,7 @@ export default function BootSequence({ isMobile = false }: BootSequenceProps) {
 ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚══════╝ ╚═════╝
 `}
           </pre>
-          <div className="mt-2 text-xs text-gray-800">海南大学网络安全团队</div>
+          <div className="mt-2 text-xs text-foreground">海南大学网络安全团队</div>
         </motion.div>
 
         <div className="space-y-2">
@@ -104,13 +104,13 @@ export default function BootSequence({ isMobile = false }: BootSequenceProps) {
                 transition={{ duration: 0.3 }}
               >
                 <span className="mr-2 text-var-color-5">{">"}&nbsp;</span>
-                <span className="text-gray-900">{message}</span>
+                <span className="text-foreground">{message}</span>
                 {index === 4 && !scanComplete && (
                   <div className="ml-2 flex items-center">
                     <div className="h-1 w-20 overflow-hidden rounded-full bg-var-color-3">
                       <motion.div className="h-full bg-var-color-5" style={{ width: `${scanProgress}%` }} />
                     </div>
-                    <span className="ml-2 text-xs text-gray-800">{scanProgress}%</span>
+                    <span className="ml-2 text-xs text-foreground">{scanProgress}%</span>
                   </div>
                 )}
                 {index === currentMessageIndex - 1 && index !== bootMessages.length - 1 && (
@@ -128,7 +128,7 @@ export default function BootSequence({ isMobile = false }: BootSequenceProps) {
               transition={{ duration: 0.5 }}
             >
               <span className="mr-2 text-var-color-5">{">"}&nbsp;</span>
-              <span className="typing-animation text-gray-900">
+              <span className="typing-animation text-foreground">
                 Boot sequence complete. Welcome to HNUSEC secure terminal.
               </span>
               <span className="cursor-blink">_</span>

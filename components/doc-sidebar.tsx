@@ -62,7 +62,7 @@ const FolderItem = ({ node, level = 0, onLinkClick, activePath }: { node: Direct
                 onClick={onLinkClick}
                 className={`flex items-center text-sm transition-colors py-1 pl-2 border-l hover:border-var-color-5/30 ${isActive
                     ? 'text-var-color-5 font-medium border-var-color-5 bg-var-color-5/5'
-                    : 'text-gray-600 border-transparent hover:text-var-color-5'}`}
+                    : 'text-muted-foreground border-transparent hover:text-var-color-5'}`}
             >
                 <FileText className={`w-3.5 h-3.5 mr-2 shrink-0 ${isActive ? 'opacity-100' : 'opacity-70'}`} />
                 <span className="line-clamp-1">{node.name}</span>
@@ -74,10 +74,10 @@ const FolderItem = ({ node, level = 0, onLinkClick, activePath }: { node: Direct
         <div className="my-1">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`flex items-center w-full text-left text-sm font-medium transition-colors py-1 ${shouldBeOpen || isOpen ? 'text-gray-900' : 'text-gray-700'} hover:text-var-color-5`}
+                className={`flex items-center w-full text-left text-sm font-medium transition-colors py-1 ${shouldBeOpen || isOpen ? 'text-foreground' : 'text-foreground'} hover:text-var-color-5`}
             >
                 <ChevronRight className={`w-3.5 h-3.5 mr-1.5 transition-transform ${isOpen ? 'rotate-90' : ''}`} />
-                {isOpen ? <FolderOpen className="w-4 h-4 mr-1.5 text-var-color-5/80" /> : <Folder className="w-4 h-4 mr-1.5 text-gray-400" />}
+                {isOpen ? <FolderOpen className="w-4 h-4 mr-1.5 text-var-color-5/80" /> : <Folder className="w-4 h-4 mr-1.5 text-muted-foreground" />}
                 <span className="truncate">{node.name}</span>
             </button>
             <AnimatePresence>
@@ -167,10 +167,10 @@ export function DocSidebar({ toc, relatedDocs, currentDirection, tree, className
                 {/* Reading Progress */}
                 <div className="bg-white/60 backdrop-blur-md rounded-lg border border-var-color-5/20 p-4 shadow-md">
                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-gray-500">阅读进度</span>
+                        <span className="text-xs text-muted-foreground">阅读进度</span>
                         <span className="text-xs font-mono text-var-color-5">{Math.round(readingProgress)}%</span>
                     </div>
-                    <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-muted rounded-full overflow-hidden">
                         <div
                             className="h-full bg-gradient-to-r from-var-color-5 to-var-color-4 transition-all duration-300"
                             style={{ width: `${readingProgress}%` }}
@@ -207,7 +207,7 @@ export function DocSidebar({ toc, relatedDocs, currentDirection, tree, className
                                     onClick={() => scrollToHeading(item.id)}
                                     className={`block w-full text-left text-sm py-1.5 px-2 rounded transition-all hover:bg-var-color-5/10 ${activeId === item.id
                                         ? 'text-var-color-5 font-medium bg-var-color-5/5 border-l-2 border-var-color-5'
-                                        : 'text-gray-600 border-l-2 border-transparent'
+                                        : 'text-muted-foreground border-l-2 border-transparent'
                                         }`}
                                     style={{ paddingLeft: `${(item.level - 1) * 12 + 8}px` }}
                                 >
@@ -235,7 +235,7 @@ export function DocSidebar({ toc, relatedDocs, currentDirection, tree, className
                                     key={idx}
                                     href={doc.path}
                                     onClick={onLinkClick}
-                                    className="flex items-center text-sm text-gray-600 hover:text-var-color-5 transition-colors group py-1"
+                                    className="flex items-center text-sm text-muted-foreground hover:text-var-color-5 transition-colors group py-1"
                                 >
                                     <ChevronRight className="w-3 h-3 mr-1 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                                     <span className="line-clamp-1">{doc.title}</span>

@@ -41,7 +41,7 @@ export function EnhancedMenu({ currentSection, executeCommand }: EnhancedMenuPro
         stiffness: 300,
         damping: 25,
       }}
-      className="fixed bottom-0 left-0 right-0 z-50 border-t border-var-color-5/30 bg-[#f0f0f5]/95 p-3 backdrop-blur-sm"
+      className="fixed bottom-0 left-0 right-0 z-50 border-t border-var-color-5/30 bg-background/95 p-3 backdrop-blur-sm"
     >
       <div className="container mx-auto">
         <motion.div
@@ -55,7 +55,7 @@ export function EnhancedMenu({ currentSection, executeCommand }: EnhancedMenuPro
               variant="ghost"
               size="sm"
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="h-6 rounded-full bg-var-color-5/10 text-gray-800 hover:bg-var-color-5/20 border border-var-color-5/20"
+              className="h-6 rounded-full bg-var-color-5/10 text-foreground hover:bg-var-color-5/20 border border-var-color-5/20"
             >
               <ChevronUp className={`h-4 w-4 transition-transform duration-300 ${isCollapsed ? "rotate-180" : ""}`} />
             </Button>
@@ -78,7 +78,7 @@ export function EnhancedMenu({ currentSection, executeCommand }: EnhancedMenuPro
                   variant="outline"
                   size="sm"
                   onClick={() => handleCommandClick(item.command)}
-                  className={`border-var-color-5/30 bg-var-color-3/50 text-sm text-gray-800 hover:bg-var-color-4/30 transition-all duration-200 ${
+                  className={`border-var-color-5/30 bg-var-color-3/50 text-sm text-foreground hover:bg-var-color-4/30 transition-all duration-200 ${
                     currentSection === item.command.toLowerCase() || activeCommand === item.command
                       ? "border-var-color-5/60 bg-var-color-5/10 shadow-sm"
                       : ""

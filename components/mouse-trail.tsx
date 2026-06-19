@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { durations } from "@/lib/motion"
 
 export function MouseTrail() {
   const [trail, setTrail] = useState<{ x: number; y: number; id: number }[]>([])
@@ -49,7 +50,7 @@ export function MouseTrail() {
               opacity: 1,
             }}
             exit={{ scale: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: durations.base }}
           />
         ))}
       </AnimatePresence>

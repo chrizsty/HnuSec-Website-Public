@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useState, useEffect, useRef, memo } from "react"
 import { motion, useAnimation } from "framer-motion"
+import { durations, easings } from "@/lib/motion"
 import { useRouter } from "next/navigation"
 import { MouseTrail } from "@/components/mouse-trail"
 import { TerminalButton } from "@/components/terminal-button"
@@ -146,7 +147,7 @@ const InteractiveButton = memo(function InteractiveButton({
   return (
     <motion.button
       ref={buttonRef}
-      className={`group relative flex items-center justify-start space-x-2 rounded-md ${isAccent ? 'bg-var-color-5 hover:bg-var-color-5/80 text-white' : 'bg-var-color-3/70 hover:bg-var-color-4/50 text-black'} px-4 py-3 shadow-md transition-colors overflow-hidden min-w-0 ${className}`}
+      className={`group relative flex items-center justify-start space-x-2 rounded-md ${isAccent ? 'bg-var-color-5 hover:bg-var-color-5/80 text-white' : 'bg-var-color-3/70 hover:bg-var-color-4/50 text-foreground'} px-4 py-3 shadow-md transition-colors overflow-hidden min-w-0 ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onMouseMove={handleMouseMove}
@@ -154,7 +155,7 @@ const InteractiveButton = memo(function InteractiveButton({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       whileTap={{ scale: 0.95 }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: durations.fast, ease: easings.smooth }}
     >
       {/* Ripple effect - only render when needed */}
       {isPressed && (
@@ -190,7 +191,7 @@ const InteractiveButton = memo(function InteractiveButton({
         className={`h-5 w-5 ${isAccent ? 'text-white' : 'text-var-color-5'} transition-transform duration-300`}
         style={{ transform: isHovered ? "scale(1.1)" : "scale(1)" }}
       />
-      <span className={`relative z-10 font-medium ${isAccent ? 'text-white' : 'text-black'}`}>{label}</span>
+      <span className={`relative z-10 font-medium ${isAccent ? 'text-white' : 'text-foreground'}`}>{label}</span>
     </motion.button>
   )
 })
@@ -316,9 +317,6 @@ export default function HomePage() {
   const router = useRouter()
   const [loaded, setLoaded] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const mousePositionRef = useRef(mousePosition)
-  const rafRef = useRef<number | undefined>(undefined)
   const [isNavigating, setIsNavigating] = useState(false)
   const [isArticlesOpen, setIsArticlesOpen] = useState(false)
   const isMobile = useMediaQuery("(max-width: 768px)")
@@ -326,30 +324,20 @@ export default function HomePage() {
   useEffect(() => {
     setLoaded(true)
 
-    // Use requestAnimationFrame for smoother mouse tracking
+    // Drive the radial-gradient highlight directly via style — writing React
+    // state every animation frame forced the whole page to re-render ~60fps
+    // just to move one background. Imperative style updates are zero-cost.
     const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return
-      const rect = containerRef.current.getBoundingClientRect()
-      mousePositionRef.current = {
-        x: (e.clientX - rect.left) / rect.width - 0.5,
-        y: (e.clientY - rect.top) / rect.height - 0.5,
-      }
-    }
-
-    const updateMousePosition = () => {
-      setMousePosition(mousePositionRef.current)
-      rafRef.current = requestAnimationFrame(updateMousePosition)
+      const el = containerRef.current
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 100 + 50
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 100 + 50
+      el.style.backgroundImage = `radial-gradient(circle at ${x}% ${y}%, rgba(163, 163, 255, 0.1), transparent 70%)`
     }
 
     window.addEventListener("mousemove", handleMouseMove)
-    rafRef.current = requestAnimationFrame(updateMousePosition)
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current)
-      }
-    }
+    return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
   const handleNavigation = (path: string, command?: string, onClick?: () => void) => {
@@ -400,7 +388,7 @@ export default function HomePage() {
   ]
 
   return (
-    <main className="relative min-h-[90vh] overflow-hidden bg-[#f0f0f5] text-black select-none">
+    <main className="relative min-h-[90vh] overflow-hidden bg-background text-foreground select-none">
       <MouseTrail />
       <TerminalButton />
       <CyberParticles />
@@ -409,7 +397,7 @@ export default function HomePage() {
       {/* Animated Aurora Background */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#f0f0f5] to-[#e8e8f0]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-background to-muted"></div>
 
         {/* Aurora effect */}
         <Aurora
@@ -532,16 +520,12 @@ export default function HomePage() {
       <div
         ref={containerRef}
         className="flex h-[90vh] flex-col px-2 py-6 md:px-12 lg:px-20"
-        style={{
-          backgroundImage: `radial-gradient(circle at ${mousePosition.x * 100 + 50}% ${mousePosition.y * 100 + 50
-            }%, rgba(163, 163, 255, 0.1), transparent 70%)`,
-        }}
       >
         <motion.div
           className="relative mb-8 max-w-full"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 50 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          transition={{ duration: durations.slow, ease: easings.smooth, delay: 0.2 }}
         >
           <div className="flex flex-col items-center md:items-start">
             <div className="w-full overflow-hidden whitespace-nowrap -mx-4 md:mx-0">
@@ -613,13 +597,13 @@ export default function HomePage() {
                 animation: "shimmer 8s infinite",
               }}
             />
-            <div className="flex items-center text-black mb-2 md:mb-3">
+            <div className="flex items-center text-foreground mb-2 md:mb-3">
               <span className="mr-2 text-var-color-5 text-lg md:text-xl">$</span>
               <span className="text-base md:text-lg font-medium">echo "HNUSEC简介"</span>
             </div>
             <TypewriterEffect
               text="HNUSEC是海南大学网络安全团队，致力于培养网络安全人才，提高网络安全意识，参与各类网络安全竞赛，为海南大学的网络安全建设贡献力量。我们专注于网络攻防技术研究、CTF竞赛训练、安全意识普及和校园网络安全维护，欢迎对网络安全感兴趣的同学加入我们的团队！"
-              className="text-sm md:text-base lg:text-lg text-black ml-4 text-left"
+              className="text-sm md:text-base lg:text-lg text-foreground ml-4 text-left"
               delay={30}
             />
           </div>

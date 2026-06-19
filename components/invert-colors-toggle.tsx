@@ -4,11 +4,19 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Moon, Sun } from "lucide-react"
 import { usePathname } from "next/navigation"
+import { useTheme } from "next-themes"
 
 export function InvertColorsToggle() {
-  const [isInverted, setIsInverted] = useState(false)
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const pathname = usePathname()
+
+  // next-themes resolves the theme asynchronously on mount; track readiness
+  // so we don't flash the wrong icon during hydration.
+  useEffect(() => setMounted(true), [])
+
+  const isDark = theme === "dark"
 
   // Determine position based on current route
   const getButtonPosition = () => {
@@ -41,7 +49,7 @@ export function InvertColorsToggle() {
         }
       }
     } else if (pathname === "/terminal") {
-      // On terminal page, move to bottom left to avoid overlap with back button
+      // On terminal page, move to bottom left to avoid overlap with the back button
       position = {
         top: "auto",
         right: "auto",
@@ -49,7 +57,7 @@ export function InvertColorsToggle() {
         left: "1.5",
       }
     } else if (pathname === "/members") {
-      // On members page, move to bottom left to avoid overlap with back button and year navigation
+      // On members page, move to bottom left to avoid overlap with the back button and year navigation
       position = {
         top: "auto",
         right: "auto",
@@ -91,38 +99,19 @@ export function InvertColorsToggle() {
 
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, isMobile])
-
-  useEffect(() => {
-    // Check if user has a preference stored
-    const storedPreference = localStorage.getItem("color-inverted")
-    if (storedPreference === "true") {
-      setIsInverted(true)
-      document.documentElement.classList.add("inverted")
-    }
-  }, [])
-
-  const toggleInvert = () => {
-    if (isInverted) {
-      document.documentElement.classList.remove("inverted")
-      localStorage.setItem("color-inverted", "false")
-      setIsInverted(false)
-    } else {
-      document.documentElement.classList.add("inverted")
-      localStorage.setItem("color-inverted", "true")
-      setIsInverted(true)
-    }
-  }
 
   // Don't render on hnuctf page, docs pages and archives list page
   if (pathname === "/hnuctf" || pathname.startsWith("/docs") || pathname === "/archives") {
     return null
   }
-  // Allow rendering on archive detail pages (pathname starts with "/archives/")
+
+  const toggleTheme = () => setTheme(isDark ? "light" : "dark")
 
   return (
     <motion.button
-      onClick={toggleInvert}
+      onClick={toggleTheme}
       className={`fixed z-50 flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full border border-var-color-5/30 bg-var-color-3/70 text-var-color-5 shadow-md backdrop-blur-sm hover:bg-var-color-4/50`}
       style={{
         top: position.top !== "auto" ? `${position.top}rem` : "auto",
@@ -134,7 +123,7 @@ export function InvertColorsToggle() {
       animate={{
         opacity: 1,
         scale: 1,
-        rotate: isInverted ? 180 : 0,
+        rotate: isDark ? 180 : 0,
       }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
@@ -142,25 +131,31 @@ export function InvertColorsToggle() {
         duration: 0.3,
         rotate: { duration: 0.5, ease: "easeInOut" },
       }}
-      aria-label={isInverted ? "Disable dark mode" : "Enable dark mode"}
+      aria-label={isDark ? "Disable dark mode" : "Enable dark mode"}
     >
       <div className="relative w-full h-full flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 1 }}
-          animate={{ opacity: isInverted ? 0 : 1, rotate: isInverted ? -90 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="absolute"
-        >
-          <Moon className="h-4 w-4 md:h-5 md:w-5" />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isInverted ? 1 : 0, rotate: isInverted ? 0 : 90 }}
-          transition={{ duration: 0.3 }}
-          className="absolute"
-        >
-          <Sun className="h-4 w-4 md:h-5 md:w-5" />
-        </motion.div>
+        {/* Sun = current state is light; Moon = current state is dark.
+            Before mount, theme is unresolved — render nothing to avoid icon flash. */}
+        {!mounted ? null : (
+          <>
+            <motion.div
+              initial={{ opacity: 1 }}
+              animate={{ opacity: isDark ? 0 : 1, rotate: isDark ? -90 : 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute"
+            >
+              <Moon className="h-4 w-4 md:h-5 md:w-5" />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isDark ? 1 : 0, rotate: isDark ? 0 : 90 }}
+              transition={{ duration: 0.3 }}
+              className="absolute"
+            >
+              <Sun className="h-4 w-4 md:h-5 md:w-5" />
+            </motion.div>
+          </>
+        )}
       </div>
     </motion.button>
   )

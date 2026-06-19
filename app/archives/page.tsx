@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef, memo } from "react"
+import { memo } from "react"
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { MouseTrail } from "@/components/mouse-trail"
@@ -12,7 +12,8 @@ import { Footer } from "@/components/footer"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { RandomTitle } from "@/components/random-title"
 import { ArchivesThemeToggle } from "@/components/archives-theme-toggle"
-import SpotlightCard from "@/components/spotlight-card"
+import SpotlightCard from "@/components/SpotlightCard"
+import { SiteBackground } from "@/components/site-background"
 import Link from "next/link"
 import {
     Home,
@@ -30,32 +31,12 @@ import {
 } from "lucide-react"
 
 const AnimatedBackground = memo(function AnimatedBackground() {
-    return (
-        <div className="fixed inset-0 z-0 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#f0f0f5] to-[#e8e8f0]"></div>
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNMzAgMzBoMzB2MzBIMzB6TTAgMzBoMzB2MzBIMHoiIGZpbGw9IiM2YjZiZmYwNSIgZmlsbC1vcGFjaXR5PSIuMDUiLz48cGF0aCBkPSJNMzAgMGgzMHYzMEgzMHpNMCAwaDMwdjMwSDB6IiBmaWxsPSIjNmI2YmZmMDUiIGZpbGwtb3BhY2l0eT0iLjA1Ii8+PC9nPjwvc3ZnPg==')] opacity-30"></div>
-        </div>
-    )
+    return <SiteBackground />
 })
 
 export default function ArchivesPage() {
     const router = useRouter()
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-    const containerRef = useRef<HTMLDivElement>(null)
     const isMobile = useMediaQuery("(max-width: 768px)")
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            if (!containerRef.current) return
-            const rect = containerRef.current.getBoundingClientRect()
-            setMousePosition({
-                x: (e.clientX - rect.left) / rect.width - 0.5,
-                y: (e.clientY - rect.top) / rect.height - 0.5,
-            })
-        }
-        window.addEventListener("mousemove", handleMouseMove)
-        return () => window.removeEventListener("mousemove", handleMouseMove)
-    }, [])
 
     const archives = [
         {
@@ -120,7 +101,7 @@ export default function ArchivesPage() {
     ]
 
     return (
-        <main className="relative min-h-screen overflow-hidden bg-[#f0f0f5] text-black select-none">
+        <main className="relative min-h-screen overflow-hidden bg-background text-foreground select-none">
             <MouseTrail />
             <TerminalButton />
             <CyberParticles />
@@ -128,7 +109,6 @@ export default function ArchivesPage() {
             <AnimatedBackground />
 
             <div
-                ref={containerRef}
                 className="relative z-10 min-h-screen"
             >
                 {/* Mobile Recommendation Banner */}
@@ -140,7 +120,7 @@ export default function ArchivesPage() {
                     >
                         <div className="max-w-7xl mx-auto flex items-center justify-center gap-3">
                             <Monitor className="w-5 h-5 text-var-color-5 flex-shrink-0" />
-                            <p className="text-sm text-gray-700 text-center">
+                            <p className="text-sm text-muted-foreground text-center">
                                 推荐使用电脑访问以获得最佳体验
                             </p>
                         </div>
@@ -158,7 +138,7 @@ export default function ArchivesPage() {
                             <div className="flex gap-3 mb-8">
                                 <Link
                                     href="/"
-                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/60 border border-var-color-5/20 text-var-color-5 hover:bg-var-color-5 hover:text-white transition-all"
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-card/60 border border-var-color-5/20 text-var-color-5 hover:bg-var-color-5 hover:text-white transition-all"
                                 >
                                     <Home className="w-4 h-4" />
                                     <span>返回首页</span>
@@ -167,10 +147,10 @@ export default function ArchivesPage() {
                             </div>
 
                             <div className="mb-6">
-                                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight mb-2">
+                                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-2">
                                     历届招新<span className="text-var-color-5">归档</span>
                                 </h1>
-                                <p className="text-gray-500 text-lg">Training Archives</p>
+                                <p className="text-muted-foreground text-lg">Training Archives</p>
                             </div>
 
                             <div className="h-1 w-20 bg-gradient-to-r from-var-color-5 to-var-color-4 rounded-full mb-8"></div>
@@ -180,7 +160,7 @@ export default function ArchivesPage() {
                                 {stats.map((stat, i) => (
                                     <SpotlightCard
                                         key={stat.label}
-                                        className="bg-white/60 backdrop-blur-md rounded-xl border border-var-color-5/20 p-4 shadow-lg"
+                                        className="bg-card/60 backdrop-blur-md rounded-xl border border-var-color-5/20 p-4 shadow-lg"
                                         spotlightColor="rgba(107, 107, 255, 0.15)"
                                     >
                                         <motion.div
@@ -190,8 +170,8 @@ export default function ArchivesPage() {
                                             className="text-center h-full"
                                         >
                                             <stat.icon className="w-6 h-6 text-var-color-5 mx-auto mb-2" />
-                                            <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                                            <div className="text-xs text-gray-500">{stat.label}</div>
+                                            <div className="text-2xl font-bold text-foreground">{stat.value}</div>
+                                            <div className="text-xs text-muted-foreground">{stat.label}</div>
                                         </motion.div>
                                     </SpotlightCard>
                                 ))}
@@ -207,7 +187,7 @@ export default function ArchivesPage() {
                             {archives.map((archive, index) => (
                                 <SpotlightCard
                                     key={index}
-                                    className="p-6 rounded-xl border border-var-color-5/20 bg-white/40 shadow-lg cursor-pointer"
+                                    className="p-6 rounded-xl border border-var-color-5/20 bg-card/40 shadow-lg cursor-pointer"
                                     spotlightColor="rgba(107, 107, 255, 0.15)"
                                 >
                                     <motion.div
@@ -218,7 +198,7 @@ export default function ArchivesPage() {
                                         onClick={() => router.push(archive.path)}
                                     >
                                         {/* Main Title */}
-                                        <h2 className="text-xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4 group-hover:opacity-80 transition-opacity">
+                                        <h2 className="text-xl md:text-4xl lg:text-5xl font-black text-foreground mb-4 group-hover:opacity-80 transition-opacity">
                                             {archive.title}
                                         </h2>
 
@@ -227,22 +207,22 @@ export default function ArchivesPage() {
                                             <span className={`px-4 py-2 rounded-full bg-gradient-to-r ${archive.color} text-white font-mono text-sm font-bold`}>
                                                 {archive.year} {archive.season}
                                             </span>
-                                            <span className="flex items-center text-gray-500">
+                                            <span className="flex items-center text-muted-foreground">
                                                 <Clock className="w-4 h-4 mr-2" />
                                                 {archive.date}
                                             </span>
-                                            <span className="flex items-center text-gray-500">
+                                            <span className="flex items-center text-muted-foreground">
                                                 <Users className="w-4 h-4 mr-2" />
                                                 {archive.participants} 人参与
                                             </span>
-                                            <span className="flex items-center text-gray-500">
+                                            <span className="flex items-center text-muted-foreground">
                                                 <BookOpen className="w-4 h-4 mr-2" />
                                                 {archive.courses} 节课程
                                             </span>
                                         </div>
 
                                         {/* Description */}
-                                        <p className="text-xl text-gray-600 leading-relaxed max-w-3xl">
+                                        <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl">
                                             {archive.description}
                                         </p>
                                     </motion.div>

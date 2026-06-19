@@ -62,11 +62,11 @@ export function MobileDocSidebar({ toc, relatedDocs, currentDirection, tree, act
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                             className="fixed inset-y-0 right-0 w-80 bg-white/95 backdrop-blur-md shadow-2xl z-50 lg:hidden overflow-y-auto border-l border-var-color-5/10"
                         >
-                            <div className="p-4 border-b border-gray-100 flex justify-between items-center sticky top-0 bg-white/95 backdrop-blur z-10">
-                                <h2 className="font-bold text-lg text-gray-800">文档导航</h2>
+                            <div className="p-4 border-b border-border flex justify-between items-center sticky top-0 bg-card/95 backdrop-blur z-10">
+                                <h2 className="font-bold text-lg text-foreground">文档导航</h2>
                                 <button
                                     onClick={() => setIsOpen(false)}
-                                    className="p-2 text-gray-500 hover:text-var-color-5 hover:bg-var-color-5/10 rounded-full transition-colors"
+                                    className="p-2 text-muted-foreground hover:text-var-color-5 hover:bg-var-color-5/10 rounded-full transition-colors"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>

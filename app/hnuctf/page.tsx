@@ -88,9 +88,15 @@ function CompetitionCard({
 export default function HnuCTFPage() {
   const competitions = [
     {
+      title: "HnuCTF 2026 夏季赛",
+      date: "2026年7月 (预计)",
+      status: "upcoming" as const,
+      description: "面向海南大学全体学生的 CTF 入门级竞赛，涵盖 Web、Crypto、Misc 等多个方向。"
+    },
+    {
       title: "HnuCTF 2026 春季赛",
       date: "2026年2月 (预计)",
-      status: "upcoming" as const,
+      status: "ended" as const,
       description: "面向海南大学全体学生的 CTF 入门级竞赛，涵盖 Web、Crypto、Misc 等多个方向。"
     },
     {

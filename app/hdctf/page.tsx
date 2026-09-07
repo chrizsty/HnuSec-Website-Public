@@ -103,8 +103,8 @@ export default function HDCTFPage() {
       date: "2026年9月12日",
       status: "upcoming" as const,
       description: "面向海南大学全体学生的 CTF 入门级竞赛，涵盖 Web、Crypto、Misc 等多个方向。",
-      enableJump: false,
-      href: "/"
+      enableJump: true,
+      href: "https://qm.qq.com/q/1l0yjImaL"
     }
   ]
 

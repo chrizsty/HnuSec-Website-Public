@@ -384,7 +384,7 @@ export default function HomePage() {
   const secondaryNavItems: NavItem[] = [
     { icon: Zap, label: "2026招新", path: "/recruitment/2026-winter", isAccent: true },
     { icon: Archive, label: "历届招新归档", path: "/archives", isAccent: false },
-    { icon: Shield, label: "HnuCTF", path: "/hnuctf", isAccent: true },
+    { icon: Shield, label: "HDCTF", path: "/hdctf", isAccent: true },
   ]
 
   return (
